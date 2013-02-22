@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Web Socket Test</title>
+    <title>Web Socket Bomber</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
@@ -9,15 +9,7 @@
         if (window.WebSocket) {
             socket = new WebSocket("ws://localhost:8081/anniversaries");
             socket.onmessage = function(event) {
-                var array = event.data.split("|");
-                var result = "";
-                for(i = 0; i < array.length - 1 ; i++) {
-                    result += array[i] + "<br/>"
-                }
-                var txt = document.getElementById("list");
-                txt.innerHTML=result;
 			}
-        
 			socket.onopen = function(event) {
 				//alert("Web Socket opened!");
 			};
@@ -39,15 +31,19 @@
                 alert("The socket is not open.");
             }
         }
+        
+        function bomb(firstName, lastName, birthday) {
+			for(var i = 0 ; i < 100; i++) {
+				send(firstName, lastName, birthday);
+			}
+		}
+        
     </script>
     <form onsubmit="return false;">
         <input type="text" name="firstName" value="" placeholder="Prénom"/>
         <input type="text" name="lastName" value="" placeholder="Nom"/>
         <input type="date" name="birthday"/>
-        <input type="button" value="Ajouter" onclick="send(this.form.firstName.value, this.form.lastName.value, this.form.birthday.value)"/>
+        <input type="button" value="Bomb" onclick="bomb(this.form.firstName.value, this.form.lastName.value, this.form.birthday.value)"/>
     </form>
-    <div class="list" id="list">
-
-    </div>
     </body>
 </html>

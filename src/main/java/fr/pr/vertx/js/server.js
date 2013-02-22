@@ -25,5 +25,6 @@ vertx.createHttpServer().websocketHandler(
 ).requestHandler(
     function(req) {
         if (req.uri == "/") req.response.sendFile("../../../../../resources/ws.html")
+        if (req.uri =="/bomb") req.response.sendFile("../../../../../resources/bomb.html");
     }
 ).listen(8081)
